@@ -1,0 +1,30 @@
+sequenceDiagram
+    participant User
+    participant Browser
+    participant Server
+
+    User->>Browser: Navigates to https://studies.cs.helsinki.fi/exampleapp/spa
+    
+    Browser->>Server: GET https://studies.cs.helsinki.fi/exampleapp/spa
+    activate Server
+    Server-->>Browser: HTML document (SPA shell)
+    deactivate Server
+    
+    Browser->>Server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate Server
+    Server-->>Browser: CSS file
+    deactivate Server
+    
+    Browser->>Server: GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+    activate Server
+    Server-->>Browser: JavaScript file (SPA logic)
+    deactivate Server
+    
+    note right of Browser: Browser executes JavaScript to render the SPA interface
+    
+    Browser->>Server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate Server
+    Server-->>Browser: JSON data (list of notes)
+    deactivate Server
+    
+    note right of Browser: Browser renders the notes dynamically using the fetched JSON data
