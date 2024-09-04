@@ -1,0 +1,18 @@
+sequenceDiagram
+    participant User
+    participant Browser
+    participant Server
+
+    User->>Browser: Writes note and clicks "Save"
+    
+    note right of Browser: Browser captures the input and triggers JavaScript event listener
+    
+    Browser->>Server: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa with note data
+    activate Server
+    
+    note right of Server: Server processes and stores the new note
+    
+    Server-->>Browser: Response with status 201 (Created) and updated JSON data
+    deactivate Server
+    
+    note right of Browser: Browser updates the notes list dynamically with the new note without reloading the page
